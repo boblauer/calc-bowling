@@ -1,0 +1,6 @@
+.build
+.cproject
+.mosync*
+.project
+*.cpp
+.settings
