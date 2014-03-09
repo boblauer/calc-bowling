@@ -1,89 +1,129 @@
 <!DOCTYPE html>
-<!--
-* @file index.html
-*
-* Template application that shows examples of how to access
-* device services from JavaScript using the Wormhole library.
--->
 <html>
 	<head>
-		<meta name="viewport" content="width=320, user-scalable=no">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-		<title>Wormhole Template App</title>
-		<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8">
-		<script type="text/javascript" charset="utf-8" src="js/wormhole.js"></script>
-		<script type="text/javascript">
-			/**
-			 * Displays the device information on the screen.
-			 */
-			function displayDeviceInfo()
-			{
-				document.getElementById("platform").innerHTML = device.platform;
-				document.getElementById("version").innerHTML = device.version;
-				document.getElementById("uuid").innerHTML = device.uuid;
-				document.getElementById("name").innerHTML = device.name;
-				document.getElementById("width").innerHTML = screen.width;
-				document.getElementById("height").innerHTML = screen.height;
-			}
 
-			/**
-			 * Vibrate device.
-			 */
-			function vibrate()
-			{
-				navigator.notification.vibrate(500);
-			}
+		<title>Calculator Bowling</title>
 
-			/**
-			 * Play one beep sound.
-			 */
-			function beep()
-			{
-				navigator.notification.beep(1);
-			}
-
-			/**
-			 * Change page background to a random color.
-			 */
-			function changeColor()
-			{
-				var color = "#" +
-					(Math.random() * 0xFFFFFF + 0x1000000)
-						.toString(16).substr(1,6);
-				document.documentElement.style.backgroundColor = color;
-				document.body.style.backgroundColor = color;
-			}
-
-			// Register event listeners.
-
-			// The "deviceready" event is sent when the system
-			// has finished loading.
-			document.addEventListener(
-				"deviceready",
-				displayDeviceInfo,
-				true);
-
-			// Close the application when the back key is pressed.
-			document.addEventListener(
-				"backbutton",
-				function() { mosync.app.exit(); },
-				true);
-		</script>
+		<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="css/intro.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="css/lane.css" type="text/css" media="screen" />
 	</head>
 	<body>
-		<div id="screen">
-			<div class="pane" id="heading">Customized Wormhole Technology</div>
-			<div class="pane" id="info">
-				<div class="infoItem">Platform: <span id="platform">&nbsp;</span></div>
-				<div class="infoItem">Version: <span id="version">&nbsp;</span></div>
-				<div class="infoItem">UUID: <span id="uuid">&nbsp;</span></div>
-				<div class="infoItem">Name: <span id="name">&nbsp;</span></div>
-				<div class="infoItem">Width: <span id="width">&nbsp;</span></div>
-				<div class="infoItem">Height: <span id="height">&nbsp;</span></div>
+		<div id="intro-screen">
+			<div class="title-container">
+				<div class="title">Calculator<br>Bowling</div>
+				<div class="high-score">High Score: 220</div>
 			</div>
-			<div class="pane button" onclick="vibrate()">Vibrate</div>
-			<div class="pane button" onclick="beep()">Beep</div>
-			<div class="pane button" onclick="changeColor()">Change Color</div>
+			<div class="start">Tap anywhere to<br>start a new game</div>
 		</div>
+		<div id="game-screen" style="display: none">
+			<div class="lane">
+				<div class="pins">
+					<div class="row">
+				    &nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;
+					</div>
+				  <div class="row">
+				  	X&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;X
+					</div>
+					<div class="row">
+						X&nbsp;&nbsp;&nbsp;X
+			    </div>
+			    <div class="row">
+			    	X
+				  </div>
+				</div>
+				<div class="lane-marker one">.</div>
+				<div class="lane-marker two">.&nbsp;&nbsp;&nbsp;.</div>
+				<div class="lane-marker three">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.</div>
+				<div class="lane-marker four">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.</div>
+			  <div class="ball-container">
+			  	<span class="ball">0</span>
+			  </div>
+			</div>
+			<div class="scoreboard">
+				<div class="cards">
+					<div class="card" data-frame="1">
+						<span class="frame">1</span>
+						<span class="second"></span>
+						<span class="first"></span>
+						<span class="score"></span>
+					</div>
+					<div class="card" data-frame="2">
+						<span class="frame">2</span>
+						<span class="second"></span>
+						<span class="first"></span>
+						<span class="score"></span>
+					</div>
+					<div class="card" data-frame="3">
+						<span class="frame">3</span>
+						<span class="second"></span>
+						<span class="first"></span>
+						<span class="score"></span>
+					</div>
+					<div class="card" data-frame="4">
+						<span class="frame">4</span>
+						<span class="second"></span>
+						<span class="first"></span>
+						<span class="score"></span>
+					</div>
+					<div class="card" data-frame="5">
+						<span class="frame">5</span>
+						<span class="second"></span>
+						<span class="first"></span>
+						<span class="score"></span>
+					</div>
+					<div class="card" data-frame="6">
+						<span class="frame">6</span>
+						<span class="second"></span>
+						<span class="first"></span>
+						<span class="score"></span>
+					</div>
+					<div class="card" data-frame="7">
+						<span class="frame">7</span>
+						<span class="second"></span>
+						<span class="first"></span>
+						<span class="score"></span>
+					</div>
+					<div class="card" data-frame="8">
+						<span class="frame">8</span>
+						<span class="second"></span>
+						<span class="first"></span>
+						<span class="score"></span>
+					</div>
+					<div class="card" data-frame="9">
+						<span class="frame">9</span>
+						<span class="second"></span>
+						<span class="first"></span>
+						<span class="score"></span>
+					</div>
+					<div class="card tenth" data-frame="10">
+						<span class="frame">10</span>
+						<span class="third"></span>
+						<span class="second"></span>
+						<span class="first"></span>
+						<span class="score"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" charset="utf-8" src="js/libs/jquery.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/libs/fittext.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/libs/lodash.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/libs/backbone.js"></script>
+
+		<script type="text/javascript" charset="utf-8" src="js/views/intro.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/views/ball.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/views/game.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/views/app.js"></script>
+		<script>
+			var app = new AppView();
+			document.addEventListener('deviceready', function() {
+				new AppView()
+			}, true);
+		</script>
 	</body>
 </html>

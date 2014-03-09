@@ -1,62 +1,61 @@
-html, body {
+
+
+
+
+
+
+.scoreboard {
+	position: absolute;
+	overflow: hidden;
+	left: 50%;
+	bottom: 0;
+	height: 50px;
+	width: 270px;
 	margin: 0;
-	padding: 0;
-	width: 100%;
+	margin-left: -135px;
+}
+
+.cards {
+	width: 5000px;
+	height: 50px;
+}
+
+.card {
+	float: left;
+	margin-right: 5px;
+	border: 1px solid black;
 	height: 100%;
-	background-color: #FFFFFF;
-	font-family: sans-serif;
-	text-decoration: none;
-
-	/* Disable text selection. */
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-o-user-select: none;
-	user-select: none;
+	width: 85px;
 }
 
-.pane {
-	display: block;
-	margin: 10px auto 10px auto;
-	border: 0px solid #EEEEEE;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
+.tenth {
+	width: 130px;
+}
+
+.card .frame {
+	float: left;
+	font-size: 10px;
+	text-decoration: underline;
+	position: relative;
+	top: 3px;
+	left: 3px;
+}
+
+.card .first, .card .second, .card .third {
+	border: 1px solid black;
+	border-top-width: 0;
+	border-right-width: 0;
+	text-align: center;
+	line-height: 25px;
+	height: 25px;
+	width: 35px;
+	float: right;
+}
+
+.card .score {
 	clear: both;
-	width: 280px;
-	padding: 10px 10px 10px 10px;
-}
-
-#heading {
-	background: #FF7F00; /*#FF7744;*/
-	color: #EEEEEE;
-	font-size: 1.6em;
-	font-weight: bold;
-	text-align: center;
-	margin-top: 15px;
-}
-
-#info {
-	background: #222222;
-	line-height: 1.5em;
-}
-
-.infoItem {
-	font-size: 0.9em;
-	font-weight: bold;
-	color: #EEEEEE;
-}
-
-.button {
-	border: 1px solid #222222;
-	text-align: center;
-	background: #15D2FF;
-	color: #222222;
-	font-size: 1.4em;
-	font-weight: bold;
-	-webkit-border-radius: 8px;
-	border-radius: 8px;
-	padding: 15px 10px 15px 10px;
-	cursor: pointer;
+	float: right;
+	width: 80%;
+	line-height: 25px;
+	padding-left: 10px;
 }

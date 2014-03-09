@@ -1,0 +1,33 @@
+#game-screen .pins .row {
+  margin: 0;
+  padding: 0;
+}
+#game-screen .lane {
+  width: 100%;
+  text-align: center;
+  margin: 20px auto;
+}
+#game-screen .lane-marker {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  line-height: 1em;
+}
+#game-screen .lane-marker.one {
+  bottom: 130px;
+}
+#game-screen .lane-marker.two {
+  bottom: 120px;
+}
+#game-screen .lane-marker.three {
+  bottom: 110px;
+}
+#game-screen .lane-marker.four {
+  bottom: 100px;
+}
+#game-screen .ball-container {
+  position: absolute;
+  bottom: 50px;
+  width: 100%;
+  text-align: center;
+}
