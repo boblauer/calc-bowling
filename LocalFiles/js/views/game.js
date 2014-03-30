@@ -7,6 +7,7 @@ var GameView = Backbone.View.extend({
 
   initialize: function() {
     this.ball = this.ball || new BallView();
+    this.pins = this.pins || new PinsView();
   },
 
   render: function() {
@@ -20,7 +21,12 @@ var GameView = Backbone.View.extend({
     }).fitText(.8);
 
     this.ball.on('hit', function(pos) {
-      console.log('hit', pos);
+      _this.pins.hit(pos);
+      _this.pins.render();
+    });
+
+    this.ball.on('thrown', function() {
+      _this.ball.reset();
     });
 
     this.ball.swing();

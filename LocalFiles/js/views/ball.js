@@ -39,12 +39,16 @@ var BallView = Backbone.View.extend({
           }
         }
       }).bind(this),
+      complete: (function() {
+        this.trigger('thrown');
+      }).bind(this),
       duration: 1000
     });
   },
 
   reset: function() {
-
+    this.$el.css('bottom', '50px');
+    this.swing();
   },
 
   getSpeed: function() {
