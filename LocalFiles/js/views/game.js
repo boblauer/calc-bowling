@@ -14,10 +14,17 @@ var GameView = Backbone.View.extend({
 
     var _this = this;
     PubSub.subscribe('next frame', function(msg, currentFrame) {
-      _this.resetAfterThrow = true;
+      var frameToMove = currentFrame - 2;
 
-      var frameToMove = currentFrame - 1;
-      _this.$el.find('.card[data-frame=' + frameToMove + ']').css('marginLeft', '-33.3%');
+      setTimeout(function() {
+        _this.$el.find('.card[data-frame=' + frameToMove + ']').animate({
+          marginLeft: '-33.3%'
+        });
+      }, 200);
+    });
+
+    PubSub.subscribe('reset pins', function() {
+      _this.resetAfterThrow = true;
     });
   },
 
@@ -48,28 +55,20 @@ var GameView = Backbone.View.extend({
 
       var totalScore = 0;
       _this.game.getFrameScores().forEach(function(frameScores, i) {
-        var firstScore = frameScores[0];
-        var secondScore = frameScores[1];
-        var frameScore = frameScores[2];
+        var firstScore = frameScores[1];
+        var secondScore = frameScores[2];
+        var thirdScore = frameScores[3];
+        var frameScore = frameScores.frameScore;
 
         if (frameScore !== '') {
           totalScore += frameScore;
           frameScore = totalScore;
         }
 
-        if (firstScore === 10) {
-          firstScore = 'X';
-          secondScore = '';
-        }
-
-        if (firstScore + secondScore === 10) secondScore = '/';
-
-        if (firstScore === 0) firstScore = '-';
-        if (secondScore === 0) secondScore = '-';
-
         _this.$el.find('.card[data-frame=' + (i + 1) + ']')
           .find('.first').text(firstScore).end()
           .find('.second').text(secondScore).end()
+          .find('.third').text(thirdScore).end()
           .find('.score').text(frameScore).end();
       });
     });
