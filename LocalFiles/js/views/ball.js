@@ -7,10 +7,12 @@ var BallView = Backbone.View.extend({
   maxSpeed: 40,
 
   initialize: function() {
-
+    this.defaultPosition = this.$el.css('bottom');
   },
 
   swing: function() {
+    if (this.interval) return;
+
     this.interval = window.setInterval((function() {
       this.pos = this.direction ? this.pos + 1 : this.pos - 1;
 
@@ -28,6 +30,7 @@ var BallView = Backbone.View.extend({
 
   throw: function() {
     window.clearInterval(this.interval);
+    this.interval = null;
 
     var hasHit = false;
     this.$el.animate({ bottom: '100%' }, {
@@ -47,8 +50,9 @@ var BallView = Backbone.View.extend({
   },
 
   reset: function() {
-    this.$el.css('bottom', '50px');
-    this.swing();
+    this.pos = Math.ceil(Math.random() * 7);
+    this.ball.html(this.getSpacing());
+    this.$el.css('bottom', this.defaultPosition).stop();
   },
 
   getSpeed: function() {

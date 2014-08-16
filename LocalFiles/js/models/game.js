@@ -3,6 +3,8 @@ function Game() {
   this.frames = [];
   this.currentFrame = null;
   this.currentFrameIndex = -1;
+
+  this.start();
 }
 
 Game.prototype.start = function() {
@@ -28,7 +30,7 @@ Game.prototype.throw = function(pins) {
 Game.prototype.advanceFrame = function() {
   this.currentFrame = this.frames[++this.currentFrameIndex];
   if (this.currentFrameIndex === 10) return this.done();
-  PubSub.publish('reset pins');
+  if (this.currentFrameIndex > 0) PubSub.publish('reset pins');
   PubSub.publish('next frame', this.currentFrameIndex);
   this.currentFrame.start();
 };
@@ -49,9 +51,8 @@ Game.prototype.getFrameScores = function() {
 };
 
 Game.prototype.done = function() {
-  this.throw = function() { };
-  PubSub.publish('finished');
-  alert('DONE!!');
+  this.isDone = true;
+  PubSub.publish('finished', this.getScore());
 };
 
 function Frame() {
@@ -144,8 +145,6 @@ LastFrame.prototype.throw = function(pins) {
   if (!this.throwsLeftToScore) return;
   if (this.isDone) return;
 
-  debugger;
-
   this.throws.push(pins);
   this.throwsLeftToScore--;
 
@@ -157,6 +156,7 @@ LastFrame.prototype.throw = function(pins) {
 
   if (!this.isDone) {
     if (pins === 10 || this.getScore() === 10) {
+      debugger;
       PubSub.publish('reset pins');
     }
   }

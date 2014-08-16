@@ -8,15 +8,25 @@ var AppView = Backbone.View.extend({
 
   initialize: function() {
     this.sizeBody();
+    this.start();
 
-    var intro = new IntroView();
-    var game = new GameView();
+    var _this = this;
+    PubSub.subscribe('finished', function() {
+      _this.intro.render();
+    });
+  },
 
-    intro.on('start', function() {
-      game.render();
+  start: function() {
+    var _this = this;
+
+    this.intro = new IntroView();
+    this.game = new GameView();
+
+    this.intro.on('start', function() {
+      _this.game.render();
     });
 
-    intro.render();
+    this.intro.render();
   },
 
   sizeBody: function() {
